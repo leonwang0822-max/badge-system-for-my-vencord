@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Discord Badge Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Discord Badge Dashboard</h1>
+            <p>Manage Discord user badges with tooltips and images</p>
+        </header>
+
+        <main>
+            <!-- Add Badge Form -->
+            <section class="add-badge-section">
+                <h2>Add New Badge</h2>
+                <form id="addBadgeForm" class="badge-form">
+                    <div class="form-group">
+                        <label for="userId">Discord User ID:</label>
+                        <input type="text" id="userId" name="userId" required placeholder="e.g., 343383572805058560">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="tooltip">Tooltip Text:</label>
+                        <input type="text" id="tooltip" name="tooltip" required placeholder="e.g., read if cute">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="badgeUrl">Badge Image URL:</label>
+                        <input type="url" id="badgeUrl" name="badgeUrl" placeholder="https://example.com/badge.gif">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="imageFile">Or Upload Image:</label>
+                        <input type="file" id="imageFile" name="imageFile" accept="image/*">
+                        <div id="uploadProgress" class="upload-progress" style="display: none;">
+                            <div class="progress-bar"></div>
+                            <span class="progress-text">Uploading...</span>
+                        </div>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary">Add Badge</button>
+                </form>
+            </section>
+
+            <!-- Existing Badges Display -->
+            <section class="badges-section">
+                <div class="badges-header">
+                    <h2>Existing Badges</h2>
+                    <div class="search-container">
+                        <input type="text" id="searchInput" placeholder="Search by User ID..." class="search-input">
+                        <button id="clearSearch" class="clear-search" style="display: none;">&times;</button>
+                    </div>
+                </div>
+                <div id="badgesContainer" class="badges-container">
+                    <!-- Badges will be loaded here dynamically -->
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Modal for image preview -->
+    <div id="imageModal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <img id="modalImage" src="" alt="Badge Preview">
+        </div>
+    </div>
+
+    <!-- Custom Delete Confirmation Modal -->
+    <div id="deleteModal" class="delete-modal" style="display: none;">
+        <div class="delete-modal-overlay"></div>
+        <div class="delete-modal-content">
+            <div class="delete-modal-header">
+                <h3>Confirm Delete</h3>
+                <button class="delete-modal-close">&times;</button>
+            </div>
+            <div class="delete-modal-body">
+                <p>Are you sure you want to delete this badge?</p>
+                <div class="badge-preview">
+                    <img id="deletePreviewImage" src="" alt="Badge preview" class="delete-preview-image">
+                    <div class="delete-preview-info">
+                        <div class="delete-preview-tooltip"></div>
+                        <div class="delete-preview-userid"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="delete-modal-footer">
+                <button id="cancelDelete" class="btn btn-secondary">Cancel</button>
+                <button id="confirmDelete" class="btn btn-danger">Delete</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast notifications -->
+    <div id="toast" class="toast" style="display: none;"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>
